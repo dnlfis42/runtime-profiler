@@ -40,11 +40,6 @@ namespace tool
 			static constexpr int MAX_LINE = 256;
 
 		private:
-			LARGE_INTEGER freq_;
-			int report_cnt_ = 0;
-			Report report_list_[MAX_REPORT_CNT]{};
-
-		private:
 			RuntimeProfiler()
 			{
 				QueryPerformanceFrequency(&freq_);
@@ -258,7 +253,7 @@ namespace tool
 				}
 
 				// 나머지 출력
-				for (unsigned int i = 0; i < report_cnt_; ++i)
+				for (int i = 0; i < report_cnt_; ++i)
 				{
 					if (&report_list_[i] == base_report)
 						continue;
@@ -291,6 +286,11 @@ namespace tool
 
 				CloseHandle(hFile);
 			} // save()
+
+		private:
+			LARGE_INTEGER freq_;
+			int report_cnt_ = 0;
+			Report report_list_[MAX_REPORT_CNT]{};
 		};
 
 		class Stopwatch
