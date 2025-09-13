@@ -1,14 +1,19 @@
 #include "runtime_profiler.h"
 
-static void a()
+namespace aa
 {
-	PROFILE_FUNC;
-
-	for (int i = 0; i < 10000; ++i)
+	static void a()
 	{
-		int j = 10;
+		PROFILE_FUNC(L"a");
+
+		for (int i = 0; i < 10000; ++i)
+		{
+			int j = 10;
+		}
 	}
 }
+
+
 
 static void b()
 {
@@ -34,7 +39,7 @@ int main()
 {
 	for (int i = 0; i < 100; ++i)
 	{
-		a();
+		aa::a();
 		b();
 		c();
 	}
